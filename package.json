@@ -45,5 +45,9 @@
   },
   "resolutions": {
     "webpack": "4.44.2"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/miomaeshima/mini-component-library.git",
+  "author": "miomaeshima <miomamomo@gmail.com>",
+  "license": "MIT"
 }
