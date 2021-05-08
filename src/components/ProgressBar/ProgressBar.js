@@ -3,50 +3,62 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { COLORS } from '../../constants';
+//VisuallyHidden is not necessary as there is aria-valuenow?
 import VisuallyHidden from '../VisuallyHidden';
 
 const SIZES = {
   large:{
+    "--height": 24+"px",
+    "--borderRadius": 8+"px",
+    "--barTop": 4 + "px",
+    "--barLeft": 4 +"px",
+    "--barHeight": 16 +"px",
+    "--barMaxWidth": 362 + "px"
   },
   medium:{
+    "--height": 12+"px",
+    "--borderRadius": 4+"px",
+    "--barTop":0,
+    "--barLeft":0,
+    "--barHeight":12+"px",
+    "--barMaxWidth": 370 + "px"
   },
   small:{
+    "--height": 8+"px",
+    "--borderRadius": 4+"px",
+    "--barTop":0,
+    "--barLeft":0,
+    "--barHeight":8+"px",
+    "--barMaxWidth":370 + "px"
   }
-}  
+}
 const ProgressBar = ({ value, size }) => {
-  if (size==="large"){
-    let Component = LargeProgressBar;
-    let Bar = LargeBar;
-  }
-
-  return <Component role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax="100">
-  <Bar value={value}></Bar>
+   const styles = SIZES[size];
+  
+  return <Component style={styles} role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax="100">
+  <Bar style={styles} value={value}></Bar>
   </Component>
 };
 
 const Component = styled.div`
 position: relative;
-height: 24px;
+height: var(--height);
+border-radius: var(--borderRadius);
 width: 370px;
-border-radius: 8px;
 background-color: ${COLORS.transparentGray15};
 box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
 `;
 
-const LargeProgressBar = styled(Component)`
-`;
-
 const Bar = styled.div`
 position: absolute;
-top:4px;
-left:4px;
-height: 16px;
-width: ${(props=>{return (props.value/100*362 + "px")})};
+top: var(--barTop);
+left: var(--barLeft);
+height: var(--barHeight);
+${'' /* So happy I could figure out the line below! */}
+width: calc(var(--barMaxWidth)*
+${(props=>{return (props.value/100)})}); 
 background-color: ${COLORS.primary};
 border-radius: ${props=>(props.value===100) ? "4px" : "4px 0px 0px 4px"};
-`;
-
-const LargeBar = styled(Bar)`
 `;
 
 export default ProgressBar;
