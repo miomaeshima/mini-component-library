@@ -34,6 +34,11 @@ const SIZES = {
 }
 const ProgressBar = ({ value, size }) => {
    const styles = SIZES[size];
+   if (value <0 ){
+    throw new Error("Value cannot be negative.");
+  } else if (value >100){
+    throw new Error("Value cannot be more than 100.")
+  }
   
   return <Component style={styles} role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax="100">
   <Bar style={styles} value={value}></Bar>
