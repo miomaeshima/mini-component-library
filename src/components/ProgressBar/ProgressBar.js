@@ -52,6 +52,8 @@ border-radius: var(--borderRadius);
 width: 370px;
 background-color: ${COLORS.transparentGray15};
 box-shadow: inset 0px 2px 4px ${COLORS.transparentGray35};
+//cut off the part of the bar overflown from the component
+overflow:hidden;
 `;
 
 const Bar = styled.div`
@@ -63,7 +65,8 @@ ${'' /* So happy I could figure out the line below! */}
 width: calc(var(--barMaxWidth)*
 ${(props=>{return (props.value/100)})}); 
 background-color: ${COLORS.primary};
-border-radius: ${props=>(props.value===100) ? "4px" : "4px 0px 0px 4px"};
+border-radius:4px 0px 0px 4px ;
+ ${'' /* ${props=>(props.value===100) ? "4px" : "4px 0px 0px 4px"}; */}
 `;
 
 export default ProgressBar;
