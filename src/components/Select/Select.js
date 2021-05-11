@@ -6,11 +6,8 @@ import Icon from "../Icon";
 import { getDisplayedValue } from "./Select.helpers";
 
 
-const Select = ({ label, value, onChange, children }) => {
-  
-  const displayedValue = getDisplayedValue(value, children)
-
-
+const Select = ({ label, value, onChange, children }) => {  
+  const displayedValue = getDisplayedValue(value, children);
 
   return (
       <Wrapper>
@@ -36,22 +33,21 @@ const NativeSelect = styled.select`
 position: absolute;
 top:0;
 left:0;
+${'' /* so that this element fill the wrapper (=the same size as the DesignedSelect)  */}
+width:100%;
 height: 100%;
 opacity: 0;
+
 `;
 
 const DesignedSelect = styled.div`
 background-color: ${COLORS.transparentGray15};
 color: ${COLORS.gray700};
-font-size: font-family: Roboto;
 font-size: ${16/16}rem;
-font-style: normal;
-font-weight: 400;
-line-height: 19px;
-letter-spacing: 0em;
 padding: 12px 16px;
 padding-right: 52px;
 border-radius: 8px;
+
 
 ${'' /* & is a place holder for current element (i.e. DesignedSelect in this case)
 a + b means element b that follows immediately after a */}
@@ -74,8 +70,8 @@ ${'' /* take icon out of flow instead of inline-block for precise placement */}
   ${'' /* svg size(width and height) is the canvas where icon is drawn so bigger than svg. */} */}
   width: var(--size);
   height: var(--size);
-  pointer-events: none;
- 
+  ${'' /* to make this event "transparent" to any click and to let NativeSelect clickable */}
+  pointer-events:none;
 `;
 
 export default Select;
