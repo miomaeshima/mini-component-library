@@ -6,6 +6,7 @@ import Icon from "../Icon";
 import { getDisplayedValue } from "./Select.helpers";
 
 
+
 const Select = ({ label, value, onChange, children }) => {  
   const displayedValue = getDisplayedValue(value, children);
 
@@ -14,7 +15,7 @@ const Select = ({ label, value, onChange, children }) => {
       <NativeSelect value={value} onChange={onChange}>
         {children}
       </NativeSelect>
-      <DesignedSelect>{displayedValue}
+      <DesignedSelect >{displayedValue}
       <IconWrapper style={{"--size": 24 + "px"}}>
       <Icon id="chevron-down" strokeWidth={2} size={24}  />
       </IconWrapper>
@@ -27,6 +28,7 @@ const Wrapper = styled.div`
 position: relative;
 ${'' /* limit the width here to limit the width of NativeSelect */}
 width: max-content;
+background: lightyellow;
 `;
 
 const NativeSelect = styled.select`  
