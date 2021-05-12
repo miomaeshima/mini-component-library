@@ -6,62 +6,76 @@ import { COLORS } from '../../constants';
 import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
 
-const SIZES ={
-  small: {
-  fontSize:16,
-  height:24,
-  bottom:1
-} ,
-  large: {
-  fontSize:18,
-  height:32,
-  bottom:4
-}
-}
-
 const IconInput = ({
   label,
   icon,
   width,
   size,
   placeholder,
- 
-}) => {
-  let styles = SIZES[size];
-  console.log(width);
-
+}) =>{
+  const SIZES = {
+    small:{
+      iconSize:16,
+      height:"24px",
+      fontSize: "14px",
+      paddingLeft: "24px",
+      iconWrapperSize: "16px"
+    },
+    large:{
+      iconSize:24,
+      height:"36px",
+      fontSize: "18px",
+      paddingLeft: "36px",
+      iconWrapperSize: "24px"
+    }
+  }
+  let styles = {...SIZES[size], ...{inputWidth: width}};
+  console.log(styles.inputWidth)
+  
   return (
-    <Wrapper style={{width: width, height:styles.height}}>
-    <IconWrapper><Icon id={icon} strokeWidth={1} size={18}/></IconWrapper>
-    <NativeInput label={label} icon={icon} type="search" placeholder={placeholder} style={{fontSize: styles.fontSize, bottom:styles.bottom}}/>
+    <Wrapper style={{height:styles.height}}>
+    <VisuallyHidden>{label}</VisuallyHidden>
+    <Input type="search" label={label} placeholder={placeholder} style={{paddingLeft:styles.paddingLeft, fontSize:styles.fontSize, width:styles.inputWidth}}/>
+    <IconWrapper style={{width:styles.iconWrapperSize, height:styles.iconWrapperSize}}><Icon id={icon} size={styles.iconSize}/></IconWrapper>
     </Wrapper>
   )
-};
+}
 
 const Wrapper = styled.div`
 position:relative;
-height: 21px;
-border-bottom: 2px solid black;
 `;
 
-const NativeInput=styled.input`
-position:absolute;
-left: 28px;
-font-color: ${COLORS.gray500};
-border: none transparent;
-outline: none;
+const Input = styled.input`
+position: absolute;
+width: 100%;
+height: 100%;
+background: beige;
+border: none;
+border-bottom: 1px solid ${COLORS.black};
+color: ${COLORS.gray700};
+
+
+&::placeholder{
+  color: ${COLORS.gray500};
+  font-weight: 400;
+}
+
+&:focus{
+outline-offset: 2px;
+}
+
+&:hover{
+  color: ${COLORS.black};
+  font-weight: 700;
+}
 `;
 
 const IconWrapper = styled.div`
- position:absolute; 
- top:0;
- left:0;
- bottom:0;
- margin: auto;
- width: 21px;
- height: 21px; 
+position: absolute;
+top: 0;
+bottom: 0;
+margin: auto;
 `;
 
-
-
 export default IconInput;
+
